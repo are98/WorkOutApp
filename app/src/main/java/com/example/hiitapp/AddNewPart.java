@@ -17,6 +17,7 @@ public class AddNewPart extends AppCompatActivity implements View.OnClickListene
 
     RadioButton rb1;
     RadioButton rb2;
+    RadioButton rb3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class AddNewPart extends AppCompatActivity implements View.OnClickListene
         findViewById(R.id.addButton).setOnClickListener(this);
         seconds = 0;
         type = "";
+
     }
 
     @Override
@@ -33,8 +35,11 @@ public class AddNewPart extends AppCompatActivity implements View.OnClickListene
         if (view.getId() == R.id.addButton)
         {
             EditText editText = (EditText) findViewById(R.id.editText);
+            EditText workoutEditText = (EditText) findViewById(R.id.ownWorkoutEditText);
+
             rb1 = (RadioButton) findViewById(R.id.radioButton1);
             rb2 = (RadioButton) findViewById(R.id.radioButton2);
+            rb3 = (RadioButton) findViewById(R.id.radioButton3);
 
             secondsStr = editText.getText().toString();
             seconds = Integer.parseInt(secondsStr);
@@ -47,6 +52,11 @@ public class AddNewPart extends AppCompatActivity implements View.OnClickListene
             if(rb2.isChecked())
             {
                 type = "Pause";
+            }
+
+            if(rb3.isChecked())
+            {
+                type = workoutEditText.getText().toString();
             }
 
             Intent objectIntent = new Intent(AddNewPart.this, MainActivity.class);

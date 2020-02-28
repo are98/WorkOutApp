@@ -35,23 +35,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String returnedType = objectIntent.getStringExtra("returnedType");
 
         seconds = returnedSeconds;
+        type = returnedType;
+
+        WorkoutClass workoutClass = new WorkoutClass(seconds, type);
+        workoutClass.setSeconds(seconds);
+        workoutClass.setType(type);
 
         tulostaKaikki();
 
 
+
+
         //näyttää palautetut arvot, Workout/rest, seconds
         TextView textView = (TextView)findViewById(R.id.textView);
-        textView.setText(returnedSeconds + "   " + returnedType);
+        textView.setText(workoutClass.getSeconds() + "   " + workoutClass.getType());
 
         ////////////////////////////////////////////////////////////////////////////////
 
         if(returnedType != null && returnedSeconds != 0)
         {
+
             secondsStr = String.valueOf(seconds);
 
             type = returnedType;
             //kun ollaan asetettu tyyppi ja aika, siitä tehdään osio listaan
-            // fullWorkout.add(new WorkoutClass(seconds, type));
+            fullWorkout.add(new WorkoutClass(seconds, type));
 
             tulostaKaikki();
         }
@@ -83,10 +91,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void tulostaKaikki()
     {
+        TextView textView1 = (TextView)findViewById(R.id.textView);
+        WorkoutClass workoutClass = new WorkoutClass(seconds, type);
+
+        ListView listView = (ListView)findViewById(R.id.listViewId);
+
+        workoutClass.setSeconds(seconds);
+        workoutClass.setType(type);
+
+        //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,fullWorkout);
+
+        workoutClass.getSeconds();
+        workoutClass.getType();
+
+        //listView.setAdapter(arrayAdapter);
+
+
 
         for (int i = 1; (i - 1) < fullWorkout.size(); i++)
         {
-
+            ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,fullWorkout);
+            listView.setAdapter(arrayAdapter);
         }
     }
 }
